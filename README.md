@@ -47,13 +47,19 @@ In the Train dataset we are provided with 12 columns(Features) of data.
 If you do not have Python installed yet, it is highly recommended that you install the Anaconda distribution of Python, which already has the above packages and more included. This project requires the following Python libraries installed:
 
 * sci-kit learn
-```bash conda install scikit-learn ``` 
+```bash 
+conda install scikit-learn 
+``` 
 
 * lightgbm
-```bash conda install lightgbm ```
+```bash 
+conda install lightgbm 
+```
 
 * xgboost
-```bash conda install xgboost ```
+```bash 
+conda install xgboost 
+```
   
 # Data Preprocessing
   ---------------------------------------------------------------------
@@ -62,8 +68,13 @@ Some columns namely device,geoNetworkDomain,traficSource,totals in the dataset a
 
 * Created subcolumns for each JSON columns.
 * check number of unique values in each column and drop constant columns. This is done using
-```bash pd.nunique(dropna=False)``` 
-* Explore the target variable that is ```bash totals.transactionRevenue```
+```bash 
+pd.nunique(dropna=False)
+``` 
+* Explore the target variable that is 
+```bash 
+totals.transactionRevenue
+```
 
 # Feature Engineering
 --------------------------------------------------------------------------------
@@ -74,31 +85,42 @@ Some columns namely device,geoNetworkDomain,traficSource,totals in the dataset a
 # Exploratory Data Analysis
 ----------------------------------------------------------------------------------
 
-```bash Date and Time v/s_transactionRevenue_```
+```bash 
+Date and Time v/s_transactionRevenue_
+```
 
  * visalised the change of transactionRevenue against _day,_weekday,_month,_year.
  * visualised the change of transactionRevenue against _visitHour.
 
-```bash device columns v/s_transactionRevenue_```
+```bash 
+device columns v/s_transactionRevenue_
+```
 
  * visualised the change of transactionRevenue against device.browser, device.deviceCategory, device.operatingSystem.
 
-```bash geoNetwork v/s transactionRevenue```
+```bash 
+geoNetwork v/s transactionRevenue
+```
 
  * visualised the change of transactionRevenue against geoNetwork.continent, geoNetwork.country, geoNetwork.subContinent , geoNetwork.networkDomain.
 
-```bash trafficSource v/s transactionRevenue```
+```bash 
+trafficSource v/s transactionRevenue
+```
 
  * visualised the change oftransactionRevenue against trafficSource.source,trafficSource.referralPath', trafficSource.medium`.
 
-```bash totals v/s transactionRevenue```
+```bash 
+totals v/s transactionRevenue
+```
 
  * visualised the change oftransactionRevenue against totals.pageViews, totals.hits.
 
 # Missing value treatment
 -----------------------------------------------------
-
-```bash pd.fillna(value)```
+```bash 
+pd.fillna(value)
+```
 
  * Numerical columns In numerical columns list only totals.hits,totals.bounces and totals.pageViews were missing, so filled it with appropriate value.
  * Categorical columns some columns had more than 60% of missing value so not able to fill it with existing category. Hence filled it with a new category 'unknown'.
