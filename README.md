@@ -132,6 +132,9 @@ Submissions are scored on the root mean squared error.
 RMSE is defined as:
 ![image](https://user-images.githubusercontent.com/76476273/138594782-5d3b029c-b2b3-4240-9e10-ab784396083e.png)
 
+
+
+
 where y hat is the natural log of the predicted revenue for a customer and y is the natural log of the actual summed revenue value plus one.
 
 find the root mean square error(rmse) of actual transactionRevenue and predicted transactionRevenue. check whether model is optimised or not.
