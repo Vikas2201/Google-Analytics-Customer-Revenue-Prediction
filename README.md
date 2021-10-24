@@ -13,6 +13,16 @@ The challenge is to analyze a Google Merchandise Store (also known as GStore, wh
 
 The dataset is available [here](https://www.kaggle.com/c/ga-customer-revenue-prediction/data)
 
+# About data 
+--------------------------------------------------------------------------
+
+We have downloaded data from below Kaggle link That provide in data set section :-
+
+ * we need to download train_v2.csv and test_v2.csv.
+ * we will be predicting the target for all users in the posted test set: test_v2.csv, for their transactions in the future time period of December 1st 2018 through January 31st 2019.
+ * Each row in the dataset is one visit to the store. Because we are predicting the log of the total revenue per user, not all rows in test.csv will correspond to a row in the submission, but all unique fullVisitorIds will correspond to a row in the submission.
+ * some of the features are in .json format so we need to parse those json columns., regarding this we will see in brief at the time of data reading.
+
 # Data Analysis
 ------------------------------------------------------------------------
 
@@ -31,29 +41,98 @@ In the Train dataset we are provided with 12 columns(Features) of data.
  * visitNumber : The session number for this user. If this is the first session, then this is set to 1.
  * visitStartTime : The timestamp (expressed as POSIX time).
 
-3 Installation
+# Installation
 -------------------------------------------------------------------------------------
 
 If you do not have Python installed yet, it is highly recommended that you install the Anaconda distribution of Python, which already has the above packages and more included. This project requires the following Python libraries installed:
 
 * sci-kit learn
-<b>conda install scikit-learn<b>
+```bash conda install scikit-learn ``` 
 
 * lightgbm
-<b>conda install lightgbm<b>
+```bash conda install lightgbm ```
 
 * xgboost
-<b>conda install xgboost<b>
+```bash conda install xgboost ```
   
 # Data Preprocessing
   ---------------------------------------------------------------------
+
 Some columns namely device,geoNetworkDomain,traficSource,totals in the dataset are in JSON form. We need to convert this JSON columns to tabular format. This is done using ajson_normalize module.
 
 * Created subcolumns for each JSON columns.
 * check number of unique values in each column and drop constant columns. This is done using
-<b>pd.nunique(dropna=False)<b> 
-* Explore the target variable that is <b>totals.transactionRevenue<b>
-Feature Engineering
-Created new columns (_day,_weekday,_month,_year) from date feature.
-created _visitHour feature from the visitStartTime which is given in timestamp format.
+```bash pd.nunique(dropna=False)``` 
+* Explore the target variable that is ```bash totals.transactionRevenue```
+
+# Feature Engineering
+--------------------------------------------------------------------------------
+
+ * Created new columns (_day,_weekday,_month,_year) from date feature.
+ * created _visitHour feature from the visitStartTime which is given in timestamp format.
+
+# Exploratory Data Analysis
+----------------------------------------------------------------------------------
+
+```bash Date and Time v/s_transactionRevenue_```
+
+ * visalised the change of transactionRevenue against _day,_weekday,_month,_year.
+ * visualised the change of transactionRevenue against _visitHour.
+
+```bash device columns v/s_transactionRevenue_```
+
+ * visualised the change of transactionRevenue against device.browser, device.deviceCategory, device.operatingSystem.
+
+```bash geoNetwork v/s transactionRevenue```
+
+ * visualised the change of transactionRevenue against geoNetwork.continent, geoNetwork.country, geoNetwork.subContinent , geoNetwork.networkDomain.
+
+```bash trafficSource v/s transactionRevenue```
+
+ * visualised the change oftransactionRevenue against trafficSource.source,trafficSource.referralPath', trafficSource.medium`.
+
+```bash totals v/s transactionRevenue```
+
+ * visualised the change oftransactionRevenue against totals.pageViews, totals.hits.
+
+# Missing value treatment
+-----------------------------------------------------
+
+```bash pd.fillna(value)```
+
+ * Numerical columns In numerical columns list only totals.hits,totals.bounces and totals.pageViews were missing, so filled it with appropriate value.
+ * Categorical columns some columns had more than 60% of missing value so not able to fill it with existing category. Hence filled it with a new category 'unknown'.
+
+# Label Encoding
+----------------------------------------------------------------------
+
+ * All categorical columns are encoded using LabelEncoder() class which is imported from sklearn.preprocessing module.
+
+# Technologies Used
+---------------------------------------------------------------
+
+ * Pycharm Is Used For IDE.
+ * For Visualization Of The Plots Matplotlib , Seaborn Are Used.
+ * Git Hub Is Used As A Version Control System.
+ * josn is for data validation processes.
+ * os is used for creating and deleting folders.
+ * csv is used for creating .csv format file.
+ * numpy is for arrays computations and mathematical operations
+ * pandas is for Manipulation and wrangling structured data
+ * scikit-learn is used for machine learning tool kit
+ * pickle is used for saving model
+ * XgBoost is used for XgBoostClassifier Implementation.
+ * well known tuning methods like GridSeachCV and RandomizedSearchCV for hyper parameter method
+
+# Evaluation of a Validation set
+-----------------------------------------------------------------------------------
+
+Submissions are scored on the root mean squared error.
+
+RMSE is defined as:
+![image](https://user-images.githubusercontent.com/76476273/138594782-5d3b029c-b2b3-4240-9e10-ab784396083e.png)
+
+where y hat is the natural log of the predicted revenue for a customer and y is the natural log of the actual summed revenue value plus one.
+
+find the root mean square error(rmse) of actual transactionRevenue and predicted transactionRevenue. check whether model is optimised or not.
 
