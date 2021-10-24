@@ -152,6 +152,11 @@ pd.fillna(value)
 Submissions are scored on the root mean squared error.
 
 RMSE is defined as:
+
+
+
+
+
 ![image](https://user-images.githubusercontent.com/76476273/138594782-5d3b029c-b2b3-4240-9e10-ab784396083e.png)
 
 
